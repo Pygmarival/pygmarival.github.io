@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Pour Merveille❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 35px;
+      border-radius: 20px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    #countdown {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+
+    #message {
+      font-size: 1.2em;
+      margin-top: 20px;
+      min-height: 100px;
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.8em;
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="title">Salut, je suis le Coeur 💖 de Cédric</h1>
+
+    <div id="countdown"></div>
+    <div id="message"></div>
+
+    <footer>
+      Par Valentin qui t'aime ❤️
+    </footer>
+  </div>
+
+  <script>
+    // 📅 Date d'ouverture : 14 février 2026 à 00:00
+    const openingDate = new Date("2026-02-14T00:00:00").getTime();
+
+    // 💖 Messages à partir du 14 février
+    // Jour 0 = 14 février
+    const dailyMessages = [
+      "Aujourd’hui, je voulais que tu saches que t’aimer est la meilleure décision de ma vie.",
+      "Jour 2 : Je pense à toi plus souvent que tu ne l’imagines.",
+      "Jour 3 : Même les journées ordinaires deviennent spéciales grâce à toi.",
+      "Jour 4 : Je suis fier de la femme que tu es et de celle que tu deviens.",
+      "Jour 5 : T’aimer me rend meilleur.",
+      "Jour 6 : Je te choisis encore, sans hésiter.",
+      "Jour 7 : Une semaine après, mon amour n’a fait que grandir."
+      // 👉 tu peux continuer autant que tu veux
+    ];
+
+    function updateContent() {
+      const now = new Date().getTime();
+      const countdownDiv = document.getElementById("countdown");
+      const messageDiv = document.getElementById("message");
+      const title = document.getElementById("title");
+
+      if (now < openingDate) {
+        // ⏳ AVANT LE 14 FÉVRIER
+        const distance = openingDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownDiv.innerHTML = `
+          ⏳ Ouverture dans<br>
+          <strong>${days}j ${hours}h ${minutes}m ${seconds}s</strong>
+        `;
+
+        messageDiv.textContent = "Reviens m'écouter dès le 14 février 2026";
+
+      } else {
+        // 💖 À PARTIR DU 14 FÉVRIER
+        title.textContent = "💖 Ce que je ressens aujourd’hui 💖";
+        countdownDiv.style.display = "none";
+
+        const daysSince = Math.floor(
+          (now - openingDate) / (1000 * 60 * 60 * 24)
+        );
+
+        if (daysSince < dailyMessages.length) {
+          messageDiv.textContent = dailyMessages[daysSince];
+        } else {
+          messageDiv.textContent =
+            "Même quand les mots s’arrêtent ici, mon amour continue chaque jour ❤️";
+        }
+      }
+    }
+
+    updateContent();
+    setInterval(updateContent, 1000);
+  </script>
+
+</body>
+</html>
